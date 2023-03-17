@@ -18,19 +18,19 @@ INSERT INTO store VALUES (13, "multivitamin", "health", 12.99, 76);
 INSERT INTO store VALUES (14, "melatonin", "health", 9.99, 15);
 INSERT INTO store VALUES (15, "chips", "snacks", 1.99, 80);
 
---display the database ordered by price. 
+-- Display the database ordered by price. 
 
 SELECT * 
   FROM store
   ORDER BY price desc; 
 
---What is the avg price of items in the bulk section? 
+-- What is the average price of items in the bulk section? 
 
 SELECT AVG(price) "avg bulk item price"
   FROM store
   WHERE section='bulk'; 
 
---What are the most 5 popular items? 
+-- What are the 5 most popular items? 
 
 SELECT item, price, popularity
   FROM store
