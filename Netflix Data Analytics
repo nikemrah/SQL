@@ -4,7 +4,7 @@ SELECT COUNT(*)
     FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" 
     WHERE type='Movie';
 
--- Q: When was the most recent batch of tv shows and/or movies added to the database? max() date()
+-- Q: When was the most recent batch of tv shows and/or movies added to the database?
 
 SELECT MAX(DATE(date_added))
     FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
