@@ -55,3 +55,19 @@ SELECT AVG(danceability) AS average_danceability
         ORDER BY popularity DESC 
         LIMIT 10);
         
+/* Which artists have songs with a popularity of 80 or above? */
+
+SELECT DISTINCT artist_name AS artist, popularity
+    FROM BIT_DB.spotifydata
+    WHERE popularity >= 80
+    GROUP BY artist_name 
+    ORDER BY popularity DESC;
+
+/* Which artist has the most songs on this list? */
+
+SELECT artist_name AS artist, COUNT(artist_name) AS total
+    FROM BIT_DB.spotifydata
+    GROUP BY artist_name    
+    HAVING COUNT(artist_name) > 1
+    ORDER BY COUNT(artist_name) DESC
+    LIMIT: 1;        
