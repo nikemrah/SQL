@@ -71,3 +71,21 @@ SELECT artist_name AS artist, COUNT(artist_name) AS total
     HAVING COUNT(artist_name) > 1
     ORDER BY COUNT(artist_name) DESC
     LIMIT: 2;        
+    
+/* What is the average tempo of the top 25 most popular songs? */
+
+SELECT AVG(tempo) AS average_tempo
+    FROM BIT_DB.spotifydata
+    WHERE track_name
+        IN (SELECT track_name 
+        FROM BIT_DB.spotifydata 
+        ORDER BY popularity DESC 
+        LIMIT 25);
+
+/* Which artist has the song with the most energy in this playlist? */ 
+
+SELECT artist_name AS artist, track_name AS song, energy
+    FROM BIT_DB.spotifydata
+    GROUP by artist
+    ORDER BY energy DESC
+    LIMIT: 1;
