@@ -36,7 +36,7 @@ SELECT artist_name AS artist, track_name AS song, AVG(popularity) AS average_pop
 SELECT DISTINCT artist_name AS artist, popularity 
     FROM BIT_DB.spotifydata
     ORDER BY popularity DESC
-    LIMIT 10
+    LIMIT 10;
 
 /* Which artist released the longest song? */
 
