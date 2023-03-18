@@ -27,13 +27,31 @@ time_signature integer NOT NULL
 
 /* What is the average popularity, danceability, and energy by artist and track? */
 
-SELECT artist_name, track_name, AVG(popularity) AS average_popularity, AVG(danceability) AS average_danceability, AVG(energy) AS average_energy
+SELECT artist_name AS artist, track_name AS song, AVG(popularity) AS average_popularity, AVG(danceability) AS average_danceability, AVG(energy) AS average_energy
     FROM BIT_DB.spotifydata
     GROUP BY artist_name, track_name;
     
-/* Who are the top 10 artists by popularity? */
+/* Who are the top 10 artists based on popularity? */
 
-SELECT track_name, artist_name, popularity
+SELECT DISTINCT artist_name AS artist, popularity 
     FROM BIT_DB.spotifydata
-    ORDER BY popularity desc
-    LIMIT 10;
+    ORDER BY popularity DESC
+    LIMIT 10
+
+/* Which artist released the longest song? */
+
+SELECT artist_name AS artist, track_name as song, duration_ms AS duration
+    FROM BIT_DB.spotifydata
+    ORDER BY duration_ms DESC
+    LIMIT: 1;
+
+/* What is the average danceability for the 10 most popular songs? */
+
+SELECT AVG(danceability) AS average_danceability
+    FROM BIT_DB.spotifydata
+    WHERE track_name 
+    IN (SELECT track_name 
+        FROM BIT_DB.spotifydata 
+        ORDER BY popularity DESC 
+        LIMIT 10);
+        
