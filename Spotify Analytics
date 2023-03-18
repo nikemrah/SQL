@@ -89,3 +89,17 @@ SELECT artist_name AS artist, track_name AS song, energy
     GROUP by artist
     ORDER BY energy DESC
     LIMIT: 1;
+    
+    /* Calculate the average popularity of the artists. Then, show the name and average popularity of each artist with a score of 90 or above and rank them as a "top star" */ 
+
+WITH avg_artist_pop_CTE AS (
+    SELECT spotify.artist_name, AVG(spotify.popularity) AS average_popularity
+    FROM spotifydata spotify
+    GROUP BY spotify.artist_name
+)
+
+SELECT artist_name, average_popularity, 'Top Star' AS rank
+    FROM avg_artist_pop_CTE
+    WHERE average_popularity >=90
+    ORDER BY average_popularity DESC;
+    
