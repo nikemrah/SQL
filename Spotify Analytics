@@ -63,11 +63,11 @@ SELECT DISTINCT artist_name AS artist, popularity
     GROUP BY artist_name 
     ORDER BY popularity DESC;
 
-/* Which artist has the most songs on this list? */
+/* Which artist(s) has/have the most songs on this list? */
 
 SELECT artist_name AS artist, COUNT(artist_name) AS total
     FROM BIT_DB.spotifydata
     GROUP BY artist_name    
     HAVING COUNT(artist_name) > 1
     ORDER BY COUNT(artist_name) DESC
-    LIMIT: 1;        
+    LIMIT: 2;        
