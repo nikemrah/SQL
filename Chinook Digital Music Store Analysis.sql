@@ -1,4 +1,4 @@
-/** Show customers (their full names, customer ID, and country) who are not in the USA. 
+/** Show customers (their full names, customer ID, and country) who are not in the USA. */
 
 SELECT customerid AS 'Customer ID', firstname AS 'First Name', lastname AS 'Surname', country AS 'Country'
   FROM customers 
