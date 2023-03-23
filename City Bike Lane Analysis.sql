@@ -93,6 +93,3 @@ SELECT street, safetyrating AS safety_rating, AVG(safetyrating) OVER (PARTITION 
     END AS recommendation    
     FROM CityBikeLanes
     ORDER BY average_safety_rating DESC;
-
-SELECT *
-    FROM citybikelanes
