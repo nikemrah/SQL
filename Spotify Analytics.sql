@@ -27,33 +27,36 @@ time_signature integer NOT NULL
 
 /* What is the average popularity, danceability, and energy by artist and track? */
 
-SELECT artist_name AS artist, track_name AS song, AVG(popularity) AS average_popularity, AVG(danceability) AS average_danceability, AVG(energy) AS average_energy
-    FROM BIT_DB.spotifydata
-    GROUP BY artist_name, track_name;
+SELECT artist_name AS 'Artist', track_name AS 'Song', 
+       AVG(popularity) AS 'Average Popularity', 
+       AVG(danceability) AS 'Average Danceability', 
+       AVG(energy) AS 'Average_Energy'
+  FROM BIT_DB.spotifydata
+ GROUP BY artist_name, track_name ;
     
 /* Who are the top 10 artists based on popularity? */
 
-SELECT DISTINCT artist_name AS artist, popularity 
-    FROM BIT_DB.spotifydata
-    ORDER BY popularity DESC
-    LIMIT 10;
+SELECT DISTINCT artist_name AS 'Artist', popularity AS 'Popularity'
+  FROM BIT_DB.spotifydata
+ ORDER BY popularity DESC
+ LIMIT 10 ;
 
 /* Which artist released the longest song? */
 
-SELECT artist_name AS artist, track_name as song, duration_ms AS duration
-    FROM BIT_DB.spotifydata
-    ORDER BY duration_ms DESC
-    LIMIT: 1;
+SELECT artist_name AS 'Artist', track_name as 'Song', duration_ms AS 'Track Length'
+  FROM BIT_DB.spotifydata
+ ORDER BY duration_ms DESC
+ LIMIT 1 ;
 
 /* What is the average danceability for the 10 most popular songs? */
 
-SELECT AVG(danceability) AS average_danceability
-    FROM BIT_DB.spotifydata
-    WHERE track_name 
-    IN (SELECT track_name 
-        FROM BIT_DB.spotifydata 
-        ORDER BY popularity DESC 
-        LIMIT 10);
+SELECT AVG(danceability) AS 'Average Danceability'
+  FROM BIT_DB.spotifydata
+ WHERE track_name 
+    IN (SELECT track_name AS 'Song'
+          FROM BIT_DB.spotifydata 
+         ORDER BY popularity DESC 
+         LIMIT 10) ;
         
 /* Which artists have songs with a popularity of 80 or above? */
 
@@ -65,41 +68,32 @@ SELECT DISTINCT artist_name AS artist, popularity
 
 /* Which artist(s) has/have the most songs on this list? */
 
-SELECT artist_name AS artist, COUNT(artist_name) AS total
-    FROM BIT_DB.spotifydata
-    GROUP BY artist_name    
-    HAVING COUNT(artist_name) > 1
-    ORDER BY COUNT(artist_name) DESC
-    LIMIT: 2;        
+SELECT artist_name AS 'Artist', 
+       COUNT(artist_name) AS 'Total Number of Songs'
+  FROM BIT_DB.spotifydata
+ GROUP BY artist_name    
+HAVING COUNT(artist_name) > 1
+ ORDER BY COUNT(artist_name) DESC
+ LIMIT 2 ;        
     
 /* What is the average tempo of the top 25 most popular songs? */
 
-SELECT AVG(tempo) AS average_tempo
-    FROM BIT_DB.spotifydata
-    WHERE track_name
-        IN (SELECT track_name 
-        FROM BIT_DB.spotifydata 
+SELECT AVG(tempo) AS 'Average Tempo'
+ FROM BIT_DB.spotifydata
+WHERE track_name
+   IN (SELECT track_name AS 'Track Name'
+         FROM BIT_DB.spotifydata 
         ORDER BY popularity DESC 
-        LIMIT 25);
+        LIMIT 25) ;
 
 /* Which artist has the song with the most energy in this playlist? */ 
 
-SELECT artist_name AS artist, track_name AS song, energy
-    FROM BIT_DB.spotifydata
-    GROUP by artist
-    ORDER BY energy DESC
-    LIMIT: 1;
+SELECT artist_name AS 'Artist', track_name AS 'Song', energy AS 'Energy'
+  FROM BIT_DB.spotifydata
+ GROUP BY artist_name
+ ORDER BY energy DESC
+    LIMIT 1 ;
     
-    /* Calculate the average popularity of the artists. Then, show the name and average popularity of each artist with a score of 90 or above and rank them as a "top star" */ 
+/* Calculate the average popularity of the artists. Then, show the name and average popularity of each artist with a score of 90 or above and rank them as a "top star" */ 
 
-WITH avg_artist_pop_CTE AS (
-    SELECT spotify.artist_name, AVG(spotify.popularity) AS average_popularity
-    FROM spotifydata spotify
-    GROUP BY spotify.artist_name
-)
-
-SELECT artist_name, average_popularity, 'Top Star' AS rank
-    FROM avg_artist_pop_CTE
-    WHERE average_popularity >=90
-    ORDER BY average_popularity DESC;
-    
+/* TBD */
