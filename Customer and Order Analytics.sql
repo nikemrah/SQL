@@ -71,7 +71,6 @@ SELECT distinct location, COUNT(orderID)
     GROUP BY location
     HAVING COUNT(orderID) > 2;
 
-
 /* How many of each type of headphone were sold in February? */
 
 SELECT product, SUM(quantity) AS total_sold, price
